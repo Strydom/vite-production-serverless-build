@@ -1,0 +1,28 @@
+service: web
+frameworkVersion: '3'
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+custom:
+  esbuild:
+    config: esbuild-config.cjs
+
+provider:
+  name: aws
+  region: eu-west-2
+  profile: serverless # you will need to create your own IAM profile with correct permissions
+  deploymentMethod: direct
+  runtime: nodejs18.x
+  memorySize: 512 # mb
+  timeout: 5 # seconds
+  versionFunctions: false
+
+functions:
+  web:
+    handler: src/server/lambda.handler
+    environment:
+      NODE_ENV: production
+    events:
+      - httpApi: '*'
