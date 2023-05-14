@@ -1,0 +1,24 @@
+service: web
+frameworkVersion: '3'
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+custom:
+  esbuild:
+    config: esbuild-config.cjs
+
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: nodejs18.x
+  memorySize: 1024 # mb
+  timeout: 10 # seconds
+  versionFunctions: false
+
+functions:
+  web:
+    handler: src/server/lambda.handler
+    events:
+      - httpApi: '*'
