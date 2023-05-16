@@ -1,23 +1,17 @@
 // Note that this file isn't processed by Vite, see https://github.com/brillout/vite-plugin-ssr/issues/562
-
 import express from 'express'
-import compression from 'compression'
 import { renderPage } from 'vite-plugin-ssr/server'
 import { root } from './root'
 import process from "process";
 import UAParser from "ua-parser-js";
-// import path from 'node:path'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
 const app = express()
 app.disable('x-powered-by')
 
-app.use(compression())
-
 if (isProduction) {
-  const sirv = (await import('sirv')).default
-  app.use(sirv(`${root}/dist/client`))
+  app.use(express.static(`${root}/dist/client`))
 } else {
   const vite = await import('vite')
   const viteDevMiddleware = (
@@ -39,8 +33,7 @@ app.get('*', async (req, res, next) => {
   const pageContext = await renderPage(pageContextInit)
   const { httpResponse } = pageContext
   if (!httpResponse) return next()
-  const { body, statusCode, contentType, earlyHints } = httpResponse
-  if (res.writeEarlyHints) res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) })
+  const { body, statusCode, contentType } = httpResponse
   res.status(statusCode).type(contentType).send(body)
 })
 
