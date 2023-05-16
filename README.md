@@ -23,7 +23,4 @@ This is an example of a ESNext typescript vite + vite-plugin-ssr + serverless ap
 
 - `pnpm run prod:lambda`
 
-Boots but runtime throws
-```text
-cannot test case insensitive FS, CLIENT_ENTRY does not point to an existing file: /Users/chstrydom/Documents/GitHub/vite-production-serverless-build/.esbuild/.build/dist/client/client.mjs
-```
+Boots & runtime does not throw any errors, but the page does not load.

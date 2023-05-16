@@ -42,10 +42,6 @@ const copyPlugin = copy({
     {
       from: ['./dist/**/*'],
       to: ['../../dist']
-    },
-    {
-      from: ['./package.json'],
-      to: ['../../package.json']
     }
   ]
 })
