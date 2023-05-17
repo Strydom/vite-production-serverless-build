@@ -2,8 +2,6 @@
 
 This is an example of a ESNext typescript vite + vite-plugin-ssr + serverless app.
 
-:construction: This is a WIP and does not work yet
-
 ## Running
 
 ### Prerequisites
@@ -22,5 +20,3 @@ This is an example of a ESNext typescript vite + vite-plugin-ssr + serverless ap
 ### With serverless-offline
 
 - `pnpm run prod:lambda`
-
-Boots & runtime does not throw any errors, but the page does not load.
